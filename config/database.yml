@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   database: sampleapp_development
-  username: user
+  #username: user
   host: localhost
   pool: 5
   timeout: 5000
