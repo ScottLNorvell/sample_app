@@ -1,12 +1,14 @@
 SampleApp::Application.routes.draw do
   # makes the 
   resources :users
-
+  resources :sessions, only: [:new, :create, :destroy]
   # maps correct path for home page
   root to: 'static_pages#home'
 
   # match routes uris to controllers!
   match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/help', to: 'static_pages#help'
   match '/about', to: 'static_pages#about'
