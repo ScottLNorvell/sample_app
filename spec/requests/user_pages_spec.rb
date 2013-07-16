@@ -80,6 +80,16 @@ describe "User Pages" do
       end
   	end
 
+    describe "trying to sign_up when signed in" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        sign_in user
+        visit signup_path
+      end
+      it { should have_selector('h1', text: 'Sample App') } 
+
+    end
+
     describe "edit" do
       let(:user) { FactoryGirl.create(:user) }
       before do
