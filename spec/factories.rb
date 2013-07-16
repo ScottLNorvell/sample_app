@@ -11,4 +11,9 @@ FactoryGirl.define do
 			admin true
 		end
 	end
+
+	factory :micropost do
+		content "I'm a post! Micronically speaking #FuckYeah!"
+		user
+	end
 end
