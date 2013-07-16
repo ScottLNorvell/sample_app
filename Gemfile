@@ -5,6 +5,11 @@ gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
 # for secure passwords!
 gem 'bcrypt-ruby', '3.0.1'
+# for making new users (sample_data.rake)
+gem 'faker', '1.0.1'
+# for pagination purposes
+gem 'will_paginate', '3.0.3'
+gem 'bootstrap-will_paginate', '0.0.6'
 
 
 
