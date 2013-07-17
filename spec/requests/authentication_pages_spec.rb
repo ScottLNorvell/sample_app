@@ -70,18 +70,16 @@ describe "AuthenticationPages" do
 				end
 
 				describe "after signing in" do
-
+					# Test for correct friendly forwarding!
 					it "should render the desired protected page" do
 						page.should have_selector('title', text: 'Edit user')
 					end
 
+					# Test that location is cleared after friendly forwarding
 					describe "when signing in again" do
 						before do
 							delete signout_path
-							visit signin_path
-							fill_in "Email", 		with: user.email
-							fill_in "Password", with: user.password
-							click_button "Sign in"
+							sign_in user
 						end
 
 						it "should render the default (Profile) page" do
@@ -90,6 +88,25 @@ describe "AuthenticationPages" do
 					end	
 				end
 			end
+		# desc "for non-signed in users" [model controllers]
+			describe "in the Microposts controller" do
+				
+				# Test non-signed in users can't create and delete posts
+				# For some reason, microposts_path and micropost_path are different
+				# Plural vs Singular
+				describe "submitting to the create action" do
+					# checks post action on mp_path
+					before { post microposts_path } 
+					specify { response.should redirect_to(signin_path) }
+				end
+
+				describe "submitting to the destroy action" do
+					# checks delete action on mp_path
+					before { delete micropost_path(FactoryGirl.create(:micropost)) } 
+					specify { response.should redirect_to(signin_path) }
+				end
+			end
+			
 
 			describe "in the Users controller" do
 

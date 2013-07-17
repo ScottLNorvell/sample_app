@@ -86,7 +86,7 @@ describe "User Pages" do
         sign_in user
         visit signup_path
       end
-      it { should have_selector('h1', text: 'Sample App') } 
+      it { should have_selector('h1', text: user.name) } 
 
     end
 

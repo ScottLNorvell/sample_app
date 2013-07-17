@@ -1,7 +1,9 @@
 SampleApp::Application.routes.draw do
-  # makes the 
+  # maps routes for user resources (new, edit, create, etc...)
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  # Sets paths etc for sessions and Microposts!
+  resources :sessions, only: [:new, :create, :destroy ]
+  resources :microposts, only: [:create, :destroy ]
   # maps correct path for home page
   root to: 'static_pages#home'
 
