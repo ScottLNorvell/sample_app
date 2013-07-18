@@ -47,6 +47,19 @@ describe "Static pages" do
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
+      describe "should have sidebar microposts count" do
+         it { should have_selector('span', text: '2 microposts') } 
+
+         describe "with proper pluralization" do
+          # Wrote this without help! Need to destroy a post and then
+          # visit root_path! (ie refresh page!)
+          before do
+            user.microposts[0].destroy
+            visit root_path
+          end
+           it { should have_selector('span', text: '1 micropost') } 
+         end
+       end
     end
   end
 

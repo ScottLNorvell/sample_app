@@ -13,7 +13,7 @@ FactoryGirl.define do
 	end
 
 	factory :micropost do
-		content "I'm a post! Micronically speaking #FuckYeah!"
+		content Faker::Lorem.sentence(5)
 		user
 	end
 end

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "User Pages" do
+  before(:all) { User.delete_all }
 	subject { page }
 
   describe "index" do
@@ -147,6 +148,21 @@ describe "User Pages" do
       it { should have_content(m1.content) } 
       it { should have_content(m2.content) } 
       it { should have_content(user.microposts.count) } 
+    end
+
+    describe "pagination" do
+      
+      before(:all) { 30.times { FactoryGirl.create(:micropost, user: user) } }
+      after(:all) { user.microposts.delete_all }
+
+      it { should have_selector('div.pagination') } 
+
+      it "should list each micropost" do
+        user.microposts.paginate(page: 1).each do |micropost|
+          page.should have_selector('li', text: micropost.content)
+        end
+      end
+
     end
   end
 
