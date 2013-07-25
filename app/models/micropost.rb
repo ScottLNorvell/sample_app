@@ -18,4 +18,13 @@ class Micropost < ActiveRecord::Base
 
   # Assures that posts will be ordered by DESCending created_at's
   default_scope order: 'microposts.created_at DESC'
+
+  def self.from_users_followed_by(user)
+  	# followed_user_ids is a SQL subselect that is interpolated into the string!
+  	# we can apearedly use escaped SQL to run db queries
+  	followed_user_ids = "SELECT followed_id FROM relationships
+  											 WHERE follower_id = :user_id"
+  	where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
+  				user_id: user)
+  end
 end

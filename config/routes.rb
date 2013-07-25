@@ -4,12 +4,13 @@ SampleApp::Application.routes.draw do
     # member means that this route responds to user number (users/1)
     member do
       # here, this will route to users/1/following etc
-      get :following, :follower
+      get :following, :followers
     end
   end
   # Sets paths etc for sessions and Microposts!
-  resources :sessions, only: [:new, :create, :destroy ]
-  resources :microposts, only: [:create, :destroy ]
+  resources :sessions,      only: [:new, :create, :destroy ]
+  resources :microposts,    only: [:create, :destroy ]
+  resources :relationships, only: [:create, :destroy]
   # maps correct path for home page
   root to: 'static_pages#home'
 
